@@ -9,8 +9,6 @@ require_once "models/log_model.php";
 
 
 
-
-
 // =====================================
 // ADMIN CONTROLLER
 //
