@@ -43,19 +43,29 @@ function create_log(
 
 
     $stmt=mysqli_prepare(
+
         $conn,
+
         $sql
+
     );
 
 
 
     mysqli_stmt_bind_param(
+
         $stmt,
+
         "isss",
+
         $user_id,
+
         $role,
+
         $action,
+
         $ip_address
+
     );
 
 
@@ -80,8 +90,11 @@ function create_log(
 
 
 function get_all_logs(
+
     $conn
+
 )
+
 {
 
 
@@ -120,8 +133,11 @@ function get_all_logs(
 
 
     return mysqli_query(
+
         $conn,
+
         $sql
+
     );
 
 
@@ -137,14 +153,18 @@ function get_all_logs(
 
 // =====================================
 // FILTER LOG BY ROLE
-// ADMIN UNIQUE FEATURE
+// ADMIN
 // =====================================
 
 
 function get_logs_by_role(
+
     $conn,
+
     $role
+
 )
+
 {
 
 
@@ -174,7 +194,7 @@ function get_logs_by_role(
 
 
 
-    WHERE activity_logs.role=?
+    WHERE activity_logs.role=? 
 
 
 
@@ -187,16 +207,23 @@ function get_logs_by_role(
 
 
     $stmt=mysqli_prepare(
+
         $conn,
+
         $sql
+
     );
 
 
 
     mysqli_stmt_bind_param(
+
         $stmt,
+
         "s",
+
         $role
+
     );
 
 
@@ -220,14 +247,18 @@ function get_logs_by_role(
 
 // =====================================
 // GET USER ACTIVITY
-// PROFILE HISTORY
+// USER PROFILE HISTORY
 // =====================================
 
 
 function get_user_logs(
+
     $conn,
+
     $user_id
+
 )
+
 {
 
 
@@ -240,7 +271,7 @@ function get_user_logs(
 
 
 
-    WHERE user_id=?
+    WHERE user_id=? 
 
 
 
@@ -253,16 +284,23 @@ function get_user_logs(
 
 
     $stmt=mysqli_prepare(
+
         $conn,
+
         $sql
+
     );
 
 
 
     mysqli_stmt_bind_param(
+
         $stmt,
+
         "i",
+
         $user_id
+
     );
 
 
@@ -291,9 +329,13 @@ function get_user_logs(
 
 
 function search_logs(
+
     $conn,
+
     $keyword
+
 )
+
 {
 
 
@@ -329,18 +371,16 @@ function search_logs(
     users.full_name LIKE ?
 
 
-
-    OR
-
-
-    users.email LIKE ?
+    OR users.email LIKE ?
 
 
+    OR activity_logs.role LIKE ?
 
-    OR
+
+    OR activity_logs.action LIKE ?
 
 
-    activity_logs.action LIKE ?
+    OR activity_logs.ip_address LIKE ?
 
 
 
@@ -352,10 +392,17 @@ function search_logs(
 
 
 
+
+
     $stmt=mysqli_prepare(
+
         $conn,
+
         $sql
+
     );
+
+
 
 
 
@@ -363,13 +410,27 @@ function search_logs(
 
 
 
+
+
     mysqli_stmt_bind_param(
+
         $stmt,
-        "sss",
+
+        "sssss",
+
         $search,
+
         $search,
+
+        $search,
+
+        $search,
+
         $search
+
     );
+
+
 
 
 
@@ -377,7 +438,10 @@ function search_logs(
 
 
 
+
+
     return mysqli_stmt_get_result($stmt);
+
 
 
 }

@@ -43,6 +43,7 @@ function togglePassword(id)
 
 
 
+
 // =====================================
 // DELETE CONFIRMATION
 // =====================================
@@ -61,6 +62,8 @@ function confirmDelete()
 
 
 }
+
+
 
 
 
@@ -131,6 +134,8 @@ function validateForm(formId)
 
 
 
+
+
 // =====================================
 // AJAX SEARCH SYSTEM
 // =====================================
@@ -165,6 +170,7 @@ function ajaxSearch(
 
 
 
+
     searchBox.addEventListener(
 
         "keyup",
@@ -174,16 +180,14 @@ function ajaxSearch(
         {
 
 
-
-            let keyword = this.value;
-
+            let keyword = this.value.trim();
 
 
 
 
             fetch(
 
-                "index.php?page=ajax&action="+action+"&keyword="+keyword
+                "index.php?page=ajax&action="+action+"&keyword="+encodeURIComponent(keyword)
 
             )
 
@@ -204,7 +208,16 @@ function ajaxSearch(
                 {
 
 
-                    document.getElementById(tableId).innerHTML = data.html;
+                    if(data.html !== undefined)
+
+                    {
+
+
+                        document.getElementById(tableId).innerHTML = data.html;
+
+
+                    }
+
 
 
                 }

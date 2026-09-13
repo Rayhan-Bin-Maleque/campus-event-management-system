@@ -399,18 +399,19 @@ No approved events available
 
 <script>
 
+document.addEventListener("DOMContentLoaded", function(){
 
-ajaxSearch(
+    ajaxSearch(
 
-    "staffEventSearch",
+        "staffEventSearch",
 
-    "search_events",
+        "search_events",
 
-    "staffEventTable"
+        "staffEventTable"
 
-);
+    );
 
-
+});
 
 </script>
 
